@@ -26,6 +26,8 @@
 #define NUM   5
 #define SYM   6
 #define FUN   7
+#define GAME  8
+#define GAME2 9
 
 / {
     chosen {
@@ -65,9 +67,27 @@
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            // quick-tap-ms = <175>;
+            quick-tap-ms = <200>;          // tap, then hold within 200ms → repeats the tap (hold-to-delete on Bspc/Del)
             // require-prior-idle-ms = <150>;
             bindings = <&mo>, <&kp>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        // Enter/exit the Gaming layer. key-positions 34 & 35 are the two
+        // right-hand thumb keys — your right hand is on the mouse while
+        // gaming, so these never fire by accident in-game. Press both
+        // together to toggle in; press both together again to toggle out.
+        // Restricted to Base + Game so stray thumb presses on other layers
+        // can't flip it. (Position numbers: top row 0-9, middle 10-19,
+        // bottom 20-29, thumbs 30-35 left-to-right.)
+        combo_game {
+            timeout-ms = <50>;
+            key-positions = <34 35>;
+            bindings = <&tog GAME>;
+            layers = <BASE GAME>;
         };
     };
 
@@ -154,8 +174,43 @@
             >;
         };
 
-        // Empty layers reserved for you to fill in live from ZMK Studio.
+        // GAMING (Satisfactory) — shifted one column RIGHT for ergonomics. Your
+        // left hand now rests on the E/S/D/F physical keys, but they still output
+        // W/A/S/D, so Satisfactory needs no in-game rebinding. The freed outer-
+        // left column is Esc / Tab / Shift (sprint under the pinky, holdable while
+        // you jump). The whole board slid right; the only keys pushed off the edge
+        // are P, ; and / — none are Satisfactory binds. Right Alt sits on the Z key
+        // (Z is unused by Satisfactory): hold it with your left hand and scroll the
+        // mouse wheel to cycle hotbar rows — also Right Alt + click = ping. Left Alt
+        // is on the inner-right thumb (save building to hotbar). The outer-right thumb
+        // is free; the toggle combo still fires on the two rightmost thumb positions.
+        game_layer {
+            display-name = "Game";
+            bindings = <
+   &kp ESC       &kp Q         &kp W          &kp E          &kp R             &kp T            &kp Y          &kp U             &kp I           &kp O
+   &kp TAB       &kp A         &kp S          &kp D          &kp F             &kp G            &kp H          &kp J             &kp K           &kp L
+   &kp LSHFT     &kp RALT      &kp X          &kp C          &kp V             &kp B            &kp N          &kp M             &kp COMMA       &kp DOT
+                               &kp LCTRL      &kp SPACE      &mo GAME2         &kp LALT         &kp RET        &none
+            >;
+        };
+
+        // GAME2 — momentary, HELD via &mo from the Game layer (inner-left thumb).
+        // Left hand = hotbar 1-0 (tap a slot; right hand can stay on the mouse).
+        // Right hand = nudge cluster for fine-placing a locked hologram (lock with
+        // H first): inverted-T arrows + Page Up/Down for vertical nudge. Hold the
+        // right-thumb Ctrl for 0.5 m half-nudges. Left bottom row + left thumbs are
+        // &trans, so Shift/Ctrl/Space and the Alt/RCtrl thumbs pass through while held.
+        game2_layer {
+            display-name = "Game2";
+            bindings = <
+   &kp N1        &kp N2        &kp N3         &kp N4         &kp N5            &none            &none          &kp UP            &none           &kp PG_UP
+   &kp N6        &kp N7        &kp N8         &kp N9         &kp N0            &none            &kp LEFT       &kp DOWN          &kp RIGHT       &kp PG_DN
+   &trans        &trans        &trans         &trans         &trans            &none            &none          &none             &none           &none
+                               &trans         &trans         &trans            &trans           &kp LCTRL      &trans
+            >;
+        };
+
+        // Empty layer reserved for you to fill in live from ZMK Studio.
         extra1 { status = "reserved"; };
-        extra2 { status = "reserved"; };
     };
 };
