@@ -174,23 +174,21 @@
             >;
         };
 
-        // GAMING (Satisfactory) — shifted one column RIGHT for ergonomics. Your
-        // left hand now rests on the E/S/D/F physical keys, but they still output
-        // W/A/S/D, so Satisfactory needs no in-game rebinding. The freed outer-
-        // left column is Esc / Tab / Shift (sprint under the pinky, holdable while
-        // you jump). The whole board slid right; the only keys pushed off the edge
-        // are P, ; and / — none are Satisfactory binds. Right Alt sits on the Z key
-        // (Z is unused by Satisfactory): hold it with your left hand and scroll the
-        // mouse wheel to cycle hotbar rows — also Right Alt + click = ping. Left Alt
-        // is on the inner-right thumb (save building to hotbar). The outer-right thumb
-        // is free; the toggle combo still fires on the two rightmost thumb positions.
+        // GAMING (Satisfactory) — shifted one column RIGHT for ergonomics: your left
+        // hand rests on the E/S/D/F keys but they still send W/A/S/D, so no in-game
+        // rebinding. Outer-left column is Esc/Tab/Shift (sprint under the pinky). P, ;
+        // and / fell off the right edge — none are Satisfactory binds. Left Ctrl sits on
+        // the 2nd-column bottom key (build snap / mass-dismantle; crouch stays on C).
+        // Thumbs: Game2 · Right Alt · Space | Backspace · Enter · Left Alt. Right Alt is
+        // on the LEFT thumb so you hold it and scroll your mouse/trackpad to cycle
+        // hotbars (also RAlt + click = ping); Left Alt on the right thumb saves to hotbar.
         game_layer {
             display-name = "Game";
             bindings = <
    &kp ESC       &kp Q         &kp W          &kp E          &kp R             &kp T            &kp Y          &kp U             &kp I           &kp O
    &kp TAB       &kp A         &kp S          &kp D          &kp F             &kp G            &kp H          &kp J             &kp K           &kp L
-   &kp LSHFT     &kp RALT      &kp X          &kp C          &kp V             &kp B            &kp N          &kp M             &kp COMMA       &kp DOT
-                               &kp LCTRL      &kp SPACE      &mo GAME2         &kp LALT         &kp RET        &none
+   &kp LSHFT     &kp LCTRL     &kp X          &kp C          &kp V             &kp B            &kp N          &kp M             &kp COMMA       &kp DOT
+                               &mo GAME2      &kp RALT       &kp SPACE         &kp BSPC         &kp RET        &kp LALT
             >;
         };
 
